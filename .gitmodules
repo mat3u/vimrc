@@ -1,0 +1,12 @@
+[submodule ".viminfo/bundle/vim-nodejs-complete"]
+	path = .viminfo/bundle/vim-nodejs-complete
+	url = https://github.com/myhere/vim-nodejs-complete.git
+[submodule ".viminfo/bundle/molokai"]
+	path = .viminfo/bundle/molokai
+	url = https://github.com/tomasr/molokai.git
+[submodule ".viminfo/bundle/vim-airline"]
+	path = .viminfo/bundle/vim-airline
+	url = https://github.com/bling/vim-airline.git
+[submodule ".viminfo/bundle/vim-ps1"]
+	path = .viminfo/bundle/vim-ps1
+	url = https://github.com/PProvost/vim-ps1.git
