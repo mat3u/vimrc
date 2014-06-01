@@ -10,3 +10,6 @@
 [submodule ".viminfo/bundle/vim-ps1"]
 	path = .viminfo/bundle/vim-ps1
 	url = https://github.com/PProvost/vim-ps1.git
+[submodule ".viminfo/bundle/hspec"]
+	path = .viminfo/bundle/hspec
+	url = https://github.com/hspec/hspec.vim
