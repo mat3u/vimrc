@@ -53,11 +53,7 @@ set nomodeline
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme = 'powerlineish'
-
-if has ('win32unix') && !has('gui_running')
-    let g:airline_powerline_fonts = 1
-endif
-
+let g:airline_powerline_fonts = 1
 
 noremap! <F1> <Esc>
 
@@ -93,3 +89,12 @@ if has('gui_running')
     "so gui.vim
     set guifont=Inconsolata:h11
 endif
+
+" How many lines should be searched for context
+let g:hasksyn_indent_search_backward = 100
+"
+" " Should we try to de-indent after a return
+let g:hasksyn_dedent_after_return = 1
+"
+" " Should we try to de-indent after a catchall case in a case .. of
+let g:hasksyn_dedent_after_catchall_case = 1
