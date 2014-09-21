@@ -4,9 +4,26 @@
 set nocompatible    " not compatible with old vi
 
 filetype off
-call pathogen#infect()
-call pathogen#helptags()
 
+set rtp+=S:/Dropbox/Env/misc/vimrc/.viminfo/bundle/Vundle.vim
+let path='S:/Dropbox/Env/misc/vimrc/.viminfo/bundle'
+call vundle#begin(path)
+" Plugins here
+
+Plugin 'bling/vim-airline'
+Plugin 'tomasr/molokai.git'
+
+Plugin 'gmarik/Vundle.vim'
+
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+
+" Optional:
+Bundle "honza/vim-snippets"
+
+" End of plugins
+call vundle#end()            " required
 filetype plugin indent on
 
 " so basic.vim
