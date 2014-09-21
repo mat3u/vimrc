@@ -12,9 +12,11 @@ call vundle#begin(path)
 
 Plugin 'bling/vim-airline'
 Plugin 'tomasr/molokai.git'
+Plugin 'tpope/vim-fugitive'
 
 Plugin 'gmarik/Vundle.vim'
 
+" Snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
