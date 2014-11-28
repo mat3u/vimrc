@@ -17,11 +17,15 @@ Plugin 'tomasr/molokai.git'
 Plugin 'tpope/vim-fugitive'
 
 Plugin 'gmarik/Vundle.vim'
+
 " Plugin 'klen/python-mode'
 
 " NERD Tree
 " Bundle 'scrooloose/nerdtree'
 " Bundle 'jistr/vim-nerdtree-tabs'
+
+Bundle "jimenezrick/vimerl"
+Bundle "nathanaelkane/vim-indent-guides"
 
 " Snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"
@@ -90,6 +94,10 @@ let g:airline_powerline_fonts = 1
 set splitbelow
 set splitright
 
+" vim-indent-guides
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_guide_size=1
+
 " Handy shortcuts
 
 set pastetoggle=<F2>
@@ -110,6 +118,16 @@ if !exists("WQ")
     map <leader>[ <esc>:tabprevious<cr> " Change tabs with <leader> [ and ]
     map <leader>] <esc>:tabnext<cr>
 
+    "pair completion
+    inoremap { {}<Left>
+    inoremap {<CR> {<CR>}<Esc>O
+    inoremap {{ {
+    inoremap {} {}
+    inoremap ( ()<Left>
+    inoremap (<CR> (<CR>)<Esc>O
+    inoremap (( (
+    inoremap () ()
+
     command! WQ wq
     command! Wq wq
     command! W w
@@ -128,6 +146,23 @@ set omnifunc=syntaxcomplete#Complete
 
 colorscheme molokai 
 
+"function! GetFontSize()
+"    return split(&guifont, ":h")[1]
+"endfunction
+"
+"function! SetFontSize(font_size)
+"   let parts = split(&guifont, ":h")
+"
+"   set guifont=(parts[0] . ":h" . a:font_size)
+"endfunction
+"
+"function! ChangeFontSize(font_diff)
+"    let fnsize = call GetFontSize()
+"    let fnsize = fnsize + a:font_diff
+"
+"    call SetFontSize(fnsize)
+"endfunction
+
 if has('gui_running')
     "so gui.vim
     set guifont=Powerline\ Consolas:h11 
@@ -137,8 +172,20 @@ if has('gui_running')
     set guioptions-=r  "remove right-hand scroll bar
     set guioptions-=L  "remove left-hand scroll bar
 
-    map <F10> <ESC>:set guifont=Powerline\ Consolas:h15<cr>
-    map <F11> <ESC>:set guifont=Powerline\ Consolas:h11<cr>
+    "    map <F10> :call ChangeFontSize(1)<cr>
+    "    map <F11> :call ChangeFontSize(-1)<cr>
+    "    map <F12> :call SetFontSize(15)<cr>
+
+    nnoremap <C-Up> :silent! let &guifont = substitute(
+                \ &guifont,
+                \ ':h\zs\d\+',
+                \ '\=eval(submatch(0)+1)',
+                \ '')<CR>
+    nnoremap <C-Down> :silent! let &guifont = substitute(
+                \ &guifont,
+                \ ':h\zs\d\+',
+                \ '\=eval(submatch(0)-1)',
+                \ '')<CR>
 
     colorscheme glacier
 endif
