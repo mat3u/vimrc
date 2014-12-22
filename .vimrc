@@ -18,8 +18,6 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'gmarik/Vundle.vim'
 
-" Plugin 'klen/python-mode'
-
 " NERD Tree
 " Bundle 'scrooloose/nerdtree'
 " Bundle 'jistr/vim-nerdtree-tabs'
@@ -32,8 +30,13 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
 
+" Markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
 " Optional:
 Bundle "honza/vim-snippets"
+Bundle "timrobinson/fsharp-vim"
 
 " End of plugins
 call vundle#end()            " required
@@ -85,9 +88,18 @@ set nomodeline
 
 set clipboard=unnamed                   " Set system clipboard as default
 
+" Replacing tabs with buffers
+set hidden
+nmap <leader>T :enew<cr>
+nmap <leader>] :bnext<cr>
+nmap <leader>[ :bprevious<cr>
+nmap <leader>bq :bp <BAR> bd #<CR>
+nmap <leader>bl :ls<cr>
+
 " Airline setup
 set laststatus=2
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t' " Show just the filename
 let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
 
@@ -106,27 +118,12 @@ set pastetoggle=<F2>
 if !exists("WQ")
     map <leader>w :w<cr>                " \w - save file
     map <leader>= gg=G                  " \= - indent whole file
-    map <leader>v :vsp<cr>              " \v - vertical split
-    map <leader>h :sp<cr>               " \h - horizontal split
-    map <leader>q :q<cr>                " \q - quit
-    map <leader>t :tabnew<cr>           " \t - new tab
-
-    map <Leader>n <plug>NERDTreeTabsToggle<CR>
+    map <leader>sv :vsp<cr>              " \v - vertical split
+    map <leader>sh :sp<cr>               " \h - horizontal split
+"    map <leader>q :q<cr>                " \q - quit
+"    map <leader>t :tabnew<cr>           " \t - new tab
 
     vnoremap <C-c> :y+<cr>              " Ctrl+C copies selected text in Visual Mode
-
-    map <leader>[ <esc>:tabprevious<cr> " Change tabs with <leader> [ and ]
-    map <leader>] <esc>:tabnext<cr>
-
-    "pair completion
-    inoremap { {}<Left>
-    inoremap {<CR> {<CR>}<Esc>O
-    inoremap {{ {
-    inoremap {} {}
-    inoremap ( ()<Left>
-    inoremap (<CR> (<CR>)<Esc>O
-    inoremap (( (
-    inoremap () ()
 
     command! WQ wq
     command! Wq wq
