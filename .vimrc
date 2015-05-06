@@ -7,8 +7,14 @@ autocmd! bufwritepost .vimrc source %
 
 filetype off
 
-set rtp+=S:/Dropbox/Env/misc/vimrc/.viminfo/bundle/Vundle.vim
-let path='S:/Dropbox/Env/misc/vimrc/.viminfo/bundle'
+let _env = $TOOLS
+let _env = substitute(_env, '\\', '/', '')
+
+let _rtp = _env . '/misc/vimrc/.viminfo/bundle/Vundle.vim'
+
+let &runtimepath = &runtimepath . "," . _rtp
+let path= _env . '/misc/vimrc/.viminfo/bundle'
+
 call vundle#begin(path)
 " Plugins here
 
@@ -20,13 +26,14 @@ Plugin 'gmarik/Vundle.vim'
 " Goyo - nondistraction mode for vim
 Plugin 'junegunn/goyo.vim'
 
-Bundle "jimenezrick/vimerl"
-Bundle "nathanaelkane/vim-indent-guides"
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'jimenezrick/vimerl'
+Bundle 'nathanaelkane/vim-indent-guides'
 
 " Snipmate
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
 
 " Latex
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
@@ -36,8 +43,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
 " Optional:
-Bundle "honza/vim-snippets"
-Bundle "timrobinson/fsharp-vim"
+Bundle 'honza/vim-snippets'
+Bundle 'timrobinson/fsharp-vim'
 
 " End of plugins
 call vundle#end()            " required
@@ -122,8 +129,6 @@ if !exists("WQ")
     map <leader>sv :vsp<cr>              " \v - vertical split
     map <leader>sh :sp<cr>               " \h - horizontal split
     map <leader>k :bd<cr>               " \k - kill buffer
-"    map <leader>q :q<cr>                " \q - quit
-"    map <leader>t :tabnew<cr>           " \t - new tab
 
     vnoremap <C-c> :y+<cr>              " Ctrl+C copies selected text in Visual Mode
 
@@ -136,6 +141,8 @@ if !exists("WQ")
     vnoremap < <gv
     vnoremap > >gv
 
+    inoremap jk <ESC>
+    inoremap kj <ESC>
 endif
 
 " omnicompletion
@@ -146,7 +153,6 @@ set omnifunc=syntaxcomplete#Complete
 colorscheme molokai 
 
 let g:goyo_width=121
-
 if has('gui_running')
     "so gui.vim
     set guifont=Consolas\ for\ Powerline\ FixedD:h11 
@@ -155,10 +161,6 @@ if has('gui_running')
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
     set guioptions-=L  "remove left-hand scroll bar
-
-    "    map <F10> :call ChangeFontSize(1)<cr>
-    "    map <F11> :call ChangeFontSize(-1)<cr>
-    "    map <F12> :call SetFontSize(15)<cr>
 
     nnoremap <C-Up> :silent! let &guifont = substitute(
                 \ &guifont,
