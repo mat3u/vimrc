@@ -134,6 +134,8 @@ if !exists("WQ")
     vnoremap < <gv
     vnoremap > >gv
 
+    inoremap jk <ESC>
+    inoremap kj <ESC>
 endif
 
 " omnicompletion
