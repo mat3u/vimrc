@@ -15,12 +15,10 @@ call vundle#begin(path)
 Plugin 'bling/vim-airline'
 Plugin 'tomasr/molokai.git'
 Plugin 'tpope/vim-fugitive'
-
 Plugin 'gmarik/Vundle.vim'
 
-" NERD Tree
-" Bundle 'scrooloose/nerdtree'
-" Bundle 'jistr/vim-nerdtree-tabs'
+" Goyo - nondistraction mode for vim
+Plugin 'junegunn/goyo.vim'
 
 Bundle "jimenezrick/vimerl"
 Bundle "nathanaelkane/vim-indent-guides"
@@ -29,6 +27,9 @@ Bundle "nathanaelkane/vim-indent-guides"
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
+
+" Latex
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 " Markdown
 Plugin 'godlygeek/tabular'
@@ -45,14 +46,14 @@ filetype plugin indent on
 " so basic.vim
 syntax on
 set showmode                    " always show mode
-set nowrap                      " don't wrap lines
+set wrap                      " don't wrap lines
 set fo-=t                       " don't wrap text when typing
 set tabstop=4
 set softtabstop=4
 set expandtab                   " expand tabs by default
 set shiftwidth=4
 set tw=79                       " Width of document
-" set colorcolumn=80
+set colorcolumn=100
 set backspace=indent,eol,start "allow backspacing over everything in insert mode
 set autoindent
 set copyindent
@@ -120,6 +121,7 @@ if !exists("WQ")
     map <leader>= gg=G                  " \= - indent whole file
     map <leader>sv :vsp<cr>              " \v - vertical split
     map <leader>sh :sp<cr>               " \h - horizontal split
+    map <leader>k :bd<cr>               " \k - kill buffer
 "    map <leader>q :q<cr>                " \q - quit
 "    map <leader>t :tabnew<cr>           " \t - new tab
 
@@ -143,26 +145,11 @@ set omnifunc=syntaxcomplete#Complete
 
 colorscheme molokai 
 
-"function! GetFontSize()
-"    return split(&guifont, ":h")[1]
-"endfunction
-"
-"function! SetFontSize(font_size)
-"   let parts = split(&guifont, ":h")
-"
-"   set guifont=(parts[0] . ":h" . a:font_size)
-"endfunction
-"
-"function! ChangeFontSize(font_diff)
-"    let fnsize = call GetFontSize()
-"    let fnsize = fnsize + a:font_diff
-"
-"    call SetFontSize(fnsize)
-"endfunction
+let g:goyo_width=121
 
 if has('gui_running')
     "so gui.vim
-    set guifont=Powerline\ Consolas:h11 
+    set guifont=Consolas\ for\ Powerline\ FixedD:h11 
 
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
@@ -184,5 +171,10 @@ if has('gui_running')
                 \ '\=eval(submatch(0)-1)',
                 \ '')<CR>
 
+    map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
     colorscheme glacier
 endif
+
+map <F10> <Esc>:Goyo<CR>
+
+set wrap
