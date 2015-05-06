@@ -7,8 +7,14 @@ autocmd! bufwritepost .vimrc source %
 
 filetype off
 
-set rtp+=S:/Dropbox/Env/misc/vimrc/.viminfo/bundle/Vundle.vim
-let path='S:/Dropbox/Env/misc/vimrc/.viminfo/bundle'
+let _env = $TOOLS
+let _env = substitute(_env, '\\', '/', '')
+
+let _rtp = _env . '/misc/vimrc/.viminfo/bundle/Vundle.vim'
+
+let &runtimepath = &runtimepath . "," . _rtp
+let path= _env . '/misc/vimrc/.viminfo/bundle'
+
 call vundle#begin(path)
 " Plugins here
 
@@ -18,25 +24,22 @@ Plugin 'tpope/vim-fugitive'
 
 Plugin 'gmarik/Vundle.vim'
 
-" NERD Tree
-" Bundle 'scrooloose/nerdtree'
-" Bundle 'jistr/vim-nerdtree-tabs'
-
-Bundle "jimenezrick/vimerl"
-Bundle "nathanaelkane/vim-indent-guides"
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'jimenezrick/vimerl'
+Bundle 'nathanaelkane/vim-indent-guides'
 
 " Snipmate
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
 
 " Markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
 " Optional:
-Bundle "honza/vim-snippets"
-Bundle "timrobinson/fsharp-vim"
+Bundle 'honza/vim-snippets'
+Bundle 'timrobinson/fsharp-vim'
 
 " End of plugins
 call vundle#end()            " required
@@ -52,7 +55,6 @@ set softtabstop=4
 set expandtab                   " expand tabs by default
 set shiftwidth=4
 set tw=79                       " Width of document
-" set colorcolumn=80
 set backspace=indent,eol,start "allow backspacing over everything in insert mode
 set autoindent
 set copyindent
@@ -120,8 +122,6 @@ if !exists("WQ")
     map <leader>= gg=G                  " \= - indent whole file
     map <leader>sv :vsp<cr>              " \v - vertical split
     map <leader>sh :sp<cr>               " \h - horizontal split
-"    map <leader>q :q<cr>                " \q - quit
-"    map <leader>t :tabnew<cr>           " \t - new tab
 
     vnoremap <C-c> :y+<cr>              " Ctrl+C copies selected text in Visual Mode
 
@@ -143,35 +143,14 @@ set omnifunc=syntaxcomplete#Complete
 
 colorscheme molokai 
 
-"function! GetFontSize()
-"    return split(&guifont, ":h")[1]
-"endfunction
-"
-"function! SetFontSize(font_size)
-"   let parts = split(&guifont, ":h")
-"
-"   set guifont=(parts[0] . ":h" . a:font_size)
-"endfunction
-"
-"function! ChangeFontSize(font_diff)
-"    let fnsize = call GetFontSize()
-"    let fnsize = fnsize + a:font_diff
-"
-"    call SetFontSize(fnsize)
-"endfunction
-
 if has('gui_running')
     "so gui.vim
-    set guifont=Powerline\ Consolas:h11 
+    set guifont=Consolas\ for\ Powerline\ FixedD:h11 
 
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=r  "remove right-hand scroll bar
     set guioptions-=L  "remove left-hand scroll bar
-
-    "    map <F10> :call ChangeFontSize(1)<cr>
-    "    map <F11> :call ChangeFontSize(-1)<cr>
-    "    map <F12> :call SetFontSize(15)<cr>
 
     nnoremap <C-Up> :silent! let &guifont = substitute(
                 \ &guifont,
